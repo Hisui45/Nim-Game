@@ -7,7 +7,7 @@ public class NimProgram {
 		Scanner keyboard = new Scanner(System.in);
 		boolean sessionStart = false;
 		boolean playGame = true;
-		System.out.println("================ Welcome to Nim! ================");
+		System.out.println("=========**====== Welcome to Nim! ================");
 		
 	while(playGame==true){
 		
