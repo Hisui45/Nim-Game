@@ -26,7 +26,7 @@ public class NimProgram {
 				System.out.println("alternating between players A and B until there are no more toothpicks left. ");
 				System.out.println("The player that removed the last toothpick is the loser.");
 			}else{
-				System.out.println("Invalid Response. Restart Program.");
+				
 			}
 			System.out.println("So...would you like to play a game of Nim? (Y/N)");
 			String userAnswer = keyboard.nextLine();
