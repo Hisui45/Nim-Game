@@ -18,7 +18,7 @@ public class NimProgram {
 			System.out.println("Do you know how to play Nim?(Y/N)");
 			userAnswerPlay = keyboard.nextLine();
 			if(userAnswerPlay.equalsIgnoreCase("Y")||userAnswerPlay.equalsIgnoreCase("Yes")){
-				
+				System.out.println("Alright... no need for instructions then.");
 			}else if (userAnswerPlay.equalsIgnoreCase("N")||userAnswerPlay.equalsIgnoreCase("No")){
 				System.out.println("How To Play:");
 				System.out.println("The player that goes second will choose a number of toothpicks between 6 and 28. Player A can only remove 1, 2, or 3 toothpicks.");
