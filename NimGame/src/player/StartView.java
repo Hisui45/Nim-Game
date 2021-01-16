@@ -2,6 +2,7 @@ package player;
 
 
 import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -11,12 +12,14 @@ import javafx.stage.Stage;
 
 public class StartView extends BorderPane {
 
-	private Stage stage;
+	public Stage stage;
+	public PlayerController controller;
+	public Scene scene;
 	private Text title;
-	private Button playGame, instructions;
+	public Button buttonPlayGame, buttonInstructions;
 	private VBox box;
 	
-	public StartView(Stage stage, PlayerController controller) {
+	public StartView(Stage stage) {
 		this.stage = stage;
 		
 		//Title
@@ -27,17 +30,22 @@ public class StartView extends BorderPane {
 		
 		
 		//Buttons
-		this.playGame = new Button("Start Playing!");
-		this.instructions = new Button("How To Play");
+		this.buttonPlayGame = new Button("Start Playing!");
+		buttonPlayGame.setFont(Font.font(buttonPlayGame.getFont().getSize()+10));
+		buttonPlayGame.setPadding(new Insets(10, 25, 10, 25));
+		
+		this.buttonInstructions = new Button("How To Play");
+		buttonInstructions.setFont(Font.font(buttonInstructions.getFont().getSize()+10));
+		buttonInstructions.setPadding(new Insets(10, 33, 10, 25));
 		
 		
 		//View
 		this.box = new VBox();
-		box.getChildren().addAll(this.title, this.playGame, this.instructions);
+		box.getChildren().addAll(this.title, this.buttonPlayGame, this.buttonInstructions);
 		this.setCenter(box);
-		VBox.setMargin(title, new Insets(0,0,30,100));
-		VBox.setMargin(playGame, new Insets(0,0,40,230));
-		VBox.setMargin(instructions, new Insets(0,0,0,230));
+		VBox.setMargin(title, new Insets(0,0,30,115));
+		VBox.setMargin(buttonPlayGame, new Insets(0,0,40,205));
+		VBox.setMargin(buttonInstructions, new Insets(0,0,0,205));
 		
 	}
 	
