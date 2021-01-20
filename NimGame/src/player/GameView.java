@@ -1,10 +1,13 @@
 package player;
 
-import java.awt.geom.Line2D;
+import java.util.Optional;
 
 import javafx.geometry.Insets;
-import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Labeled;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.BorderStroke;
@@ -18,19 +21,20 @@ import javafx.scene.text.Text;
 
 public class GameView extends BorderPane {
 	
-	public HBox topBar, sticks;
+	public HBox topBar, sticks, firstRandomizer;
 	public VBox centerBox;
-	public Text playerOne, playerTwo, roundChanges;
-	public TextField userInput;
+	public Text playerOne, playerTwo, roundChanges, firstTurn;
+	public TextField userInput, inputName;
+	public Alert playerName, firstPlayer;
 
-	public GameView(PlayerModel model) {
+	public GameView() {
 		topBar = new HBox();
 		
 		
 		//Text(Player Names)
 		
-		playerOne = new Text("Player One");
-		playerTwo = new Text("Player Two");
+		playerOne = new Text("Hisui");
+		playerTwo = new Text("Computer");
 		
 		topBar.getChildren().addAll(playerOne, playerTwo);
 		HBox.setMargin(playerOne, new Insets(0,440, 0, 0));
@@ -46,24 +50,32 @@ public class GameView extends BorderPane {
 		BorderPane.setMargin(userInput, new Insets(15));
 		
 		
-		//Visual
+		//Game Visual
 		centerBox = new VBox();
 		sticks = new HBox();
 		sticks.setPrefSize(500, 500);
 		sticks.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(5), new BorderWidths(2))));
 		
+		roundChanges = new Text(); 
 		
-		roundChanges = new Text("Hisui took 3 sticks"); 
-//		Node stick = new Stick();
-//		sticks.getChildren().add(stick);
-//		HBox.setMargin(stick, new Insets(15));
 		VBox.setMargin(sticks, new Insets(15));
 		VBox.setMargin(roundChanges, new Insets(0, 0, 0, 250));
 		centerBox.getChildren().addAll(sticks, roundChanges);
 		
 		this.setCenter(centerBox);
-
 		
+		playerName = new Alert(AlertType.INFORMATION);
+		playerName.setTitle("Enter your username");
+		playerName.setHeaderText("What's your username?");
+		inputName = new TextField();
+		playerName.getDialogPane().setContent(inputName);
+		
+		firstPlayer = new Alert(AlertType.INFORMATION);
+		firstPlayer.setTitle("First Turn");
+		firstPlayer.setHeaderText("This player will go first:");
+		firstTurn = new Text();
+		firstPlayer.getDialogPane().setContent(firstTurn);
+			
 	}
 	
 }

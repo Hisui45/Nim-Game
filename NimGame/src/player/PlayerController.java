@@ -1,12 +1,15 @@
 package player;
 
 import java.util.Date;
+import java.util.Optional;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
+import javafx.scene.control.ButtonType;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -23,7 +26,7 @@ public class PlayerController {
 
 	public void setViews(StartView startView) {
 		this.startView = startView;
-		this.gameView = new GameView(playerModel);
+		this.gameView = new GameView();
 		
 		startView.buttonPlayGame.setOnAction(this :: startGame);
 		startView.buttonInstructions.setOnAction(this :: showInstruction);
@@ -32,6 +35,13 @@ public class PlayerController {
 	
 	
 	public void startGame(ActionEvent e) {
+		Optional<ButtonType> chooseName = this.gameView.playerName.showAndWait();
+	     if (chooseName.get() == ButtonType.OK) {
+	    	 this.gameView.playerOne.setText(this.gameView.inputName.getText());
+	    	 
+	    	 this.gameView.inputName.clear();
+	     }
+	     
 		Stage gameStage = new Stage();
 		Scene gameScene =  new Scene(this.gameView, 615, 600);
 		gameStage.setScene(gameScene);
@@ -39,9 +49,21 @@ public class PlayerController {
 		gameStage.show();
 		this.startView.stage.close();
 		
+		Random playerChooser = new Random();
+		int playerDecision = playerChooser.nextInt((26 - 1)+ 1) + 1;
+		
+		if(playerDecision % 2 == 0) {
+			this.gameView.firstTurn.setText(this.gameView.playerOne.getText());
+		}else {
+			this.gameView.firstTurn.setText("Computer");
+		}
+		   this.gameView.firstPlayer.showAndWait();
+		   
+		
+		   
 		Timer timer = new Timer();
 		TimerTask task = new dynamic(gameScene, gameStage, playerModel);
-		timer.schedule(task, new Date(), 500);
+		//timer.schedule(task, new Date(), 500);
 		
 		
 	}
@@ -72,7 +94,7 @@ public class PlayerController {
 		public void run() {
 			 Platform.runLater(new Runnable() {
 	             @Override public void run() {
-	            	 scene = new Scene(new GameView(playerModel), 615, 600);
+	            	 scene = new Scene(new GameView(), 615, 600);
 	         		 stage.setScene(scene);
 	             }
 	         });
