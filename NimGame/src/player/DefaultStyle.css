@@ -1,0 +1,7 @@
+.userInputOK{
+	-fx-text-fill: green;
+}
+
+.userInputNotOK{
+	-fx-text-fill: red;
+}
