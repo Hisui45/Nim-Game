@@ -1,8 +1,7 @@
-.text-field {
--fx-background-color:#eeeeee;
--fx-background-color: -fx-text-box-border, -fx-background;
--fx-background-insets: 0, 0 0 1 0;
--fx-background-radius: 0;
--fx-min-width: 350;
--fx-min-height: 10;
+.userInputOK{
+	-fx-text-fill: green;
+}
+
+.userInputNotOK{
+	-fx-text-fill: red;
 }

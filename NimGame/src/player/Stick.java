@@ -18,7 +18,7 @@ public class Stick extends ImageView {
 			
 			e.printStackTrace();
 		}
-		Image logo = new Image(localUrl, 50, 50, false, false);
+		Image logo = new Image(localUrl, 85, 85, false, false);
 	
 		this.setImage(logo);
 		

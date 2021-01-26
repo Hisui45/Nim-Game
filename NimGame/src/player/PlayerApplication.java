@@ -24,13 +24,11 @@ public class PlayerApplication extends Application{
 	@Override
 	public void start(Stage stage) throws Exception {
 		
-		this.model = new PlayerModel();
-		this.controller = new PlayerController(this.model);
+	
 		this.startView = new StartView(stage);
-		
-		this.controller.setViews(this.startView);
+		this.controller = new PlayerController(this.startView);
 
-		scene = new Scene(this.startView, 600, 600);
+		scene = new Scene(this.startView, 500, 500);
 		scene.getStylesheets().add(getClass().getResource("DefaultStyle.css").toExternalForm());
 
 		stage.setScene(scene);
@@ -43,7 +41,7 @@ public class PlayerApplication extends Application{
 			public void handle(KeyEvent event) {
 				if(event.getCode() == KeyCode.R) {
 					//stage.close();
-					scene = new Scene(new StartView(stage), 600, 600);
+					scene = new Scene(new StartView(stage), 500, 500);
 					stage.setScene(scene);
 				
 				

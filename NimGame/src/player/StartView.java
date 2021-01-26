@@ -43,9 +43,9 @@ public class StartView extends BorderPane {
 		this.box = new VBox();
 		box.getChildren().addAll(this.title, this.buttonPlayGame, this.buttonInstructions);
 		this.setCenter(box);
-		VBox.setMargin(title, new Insets(0,0,30,115));
-		VBox.setMargin(buttonPlayGame, new Insets(0,0,40,205));
-		VBox.setMargin(buttonInstructions, new Insets(0,0,0,205));
+		VBox.setMargin(title, new Insets(0,0,30,65));
+		VBox.setMargin(buttonPlayGame, new Insets(0,0,40,155));
+		VBox.setMargin(buttonInstructions, new Insets(0,0,0,155));
 		
 	}
 	
