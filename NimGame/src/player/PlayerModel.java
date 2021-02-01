@@ -218,52 +218,51 @@ public class PlayerModel {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-		        
-			
+		  
 			//Taking Sticks Away
-//			Thread t1 = new Thread(new Runnable(){ 
-//	            @Override
-//	            public void run(){ 
-//	                try{ 
-//	                   promptForInput(); 
-//	                }catch(InterruptedException e){ 
-//	                    e.printStackTrace(); 
-//	                } 
-//	            } 
-//	        });
-//			
-//			 Thread t2 = new Thread(new Runnable(){ 
-//		            @Override
-//		            public void run(){ 
-//		            	
-//		                try{ 
-//		                    getInput(); 
-//		                } 
-//		                catch(InterruptedException e){ 
-//		                    e.printStackTrace(); 
-//		                } 
-//		            } 
-//		        }); 
-//		  
-//		        // Start both threads 
-//		        t1.start(); 
-//		        t2.start(); 
-//		  
-//		        // t1 finishes before t2 
-//		        try {
-//					t1.join();
-//				} catch (InterruptedException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				} 
-//		        try {
-//					t2.join();
-//				} catch (InterruptedException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//	            
-//	
+			Thread t1 = new Thread(new Runnable(){ 
+	            @Override
+	            public void run(){ 
+	                try{ 
+	                   promptForInput(); 
+	                }catch(InterruptedException e){ 
+	                    e.printStackTrace(); 
+	                } 
+	            } 
+	        });
+			
+			 Thread t2 = new Thread(new Runnable(){ 
+		            @Override
+		            public void run(){ 
+		            	
+		                try{ 
+		                    getInput(); 
+		                } 
+		                catch(InterruptedException e){ 
+		                    e.printStackTrace(); 
+		                } 
+		            } 
+		        }); 
+		  
+		        // Start both threads 
+		        t1.start(); 
+		        t2.start(); 
+		  
+		        // t1 finishes before t2 
+		        try {
+					t1.join();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
+		        try {
+					t2.join();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	            
+	
 
 	            }
 		

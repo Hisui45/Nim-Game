@@ -101,16 +101,24 @@ public class PlayerController {
 	
 	public void getStartValue(KeyEvent e)  {
 		logger.info("Checking Recieved Stick Count...");
+		int dimension = 85;
 		if(e.getCode() == KeyCode.ENTER) {
 			if(checkUserInput) {
 				int sticks = Integer.valueOf(this.gameView.userInput.getText());
 				
 				this.gameView.roundChanges.setText("Player has choosen to start with "+ sticks + " sticks." );
+				if(sticks>24) {
+					dimension = 70;
+				}else if(sticks>20) {
+					dimension = 68;
+				}
+				
 				for(int x = 0; x<sticks; x++) {
-					Stick stick = new Stick();
+					Stick stick = new Stick(dimension);
 					this.gameView.sticks.getChildren().add(stick);
 				}
 				this.playerModel.press = true;
+				this.gameView.setBottom(this.gameView.buttonBox);
 			}else {
 				this.gameView.roundChanges.setText("Enter a number between 6 and 28 to start." );
 			}

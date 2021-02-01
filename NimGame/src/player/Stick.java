@@ -8,7 +8,7 @@ import javafx.scene.image.ImageView;
 
 public class Stick extends ImageView {
 	
-	public Stick() {
+	public Stick(int dimension) {
 	
 		File file = new File(System.getProperty("user.dir")+"\\resources\\stick_image.png");
 		String localUrl = null;
@@ -18,7 +18,7 @@ public class Stick extends ImageView {
 			
 			e.printStackTrace();
 		}
-		Image logo = new Image(localUrl, 85, 85, false, false);
+		Image logo = new Image(localUrl, dimension, dimension, false, false);
 	
 		this.setImage(logo);
 		

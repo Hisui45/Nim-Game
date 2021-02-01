@@ -52,7 +52,7 @@ public class GameView extends BorderPane {
 		buttonTwo = new Button("Two (2)");
 		buttonThree = new Button("Three (3)"); 
 		buttonBox.getChildren().addAll(buttonOne, buttonTwo, buttonThree);
-		buttonBox.setSpacing(30);
+		buttonBox.setSpacing(70);
 		buttonBox.setMaxSize(445, 15);
 		buttonBox.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(5), new BorderWidths(2))));
 		
