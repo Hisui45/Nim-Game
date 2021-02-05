@@ -1,15 +1,12 @@
 package player;
 
 
-import java.util.Date;
-import java.util.Timer;
 import java.util.TimerTask;
 
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Labeled;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
@@ -43,9 +40,7 @@ public class PlayerApplication extends Application{
 					//stage.close();
 					scene = new Scene(new StartView(stage), 500, 500);
 					stage.setScene(scene);
-				
-				
-					
+
 				}
 			}
 		};

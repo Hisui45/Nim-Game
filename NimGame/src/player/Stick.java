@@ -10,7 +10,7 @@ public class Stick extends ImageView {
 	
 	public Stick(int dimension) {
 	
-		File file = new File(System.getProperty("user.dir")+"\\resources\\stick_image.png");
+		File file = new File(System.getProperty("user.dir")+"\\NimGame\\resources\\stick_image.png");
 		String localUrl = null;
 		try {
 			localUrl = file.toURI().toURL().toString();

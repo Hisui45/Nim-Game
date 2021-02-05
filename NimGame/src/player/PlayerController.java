@@ -53,7 +53,7 @@ public class PlayerController {
 	     }
 	     
 		Stage gameStage = new Stage();
-		Scene gameScene =  new Scene(this.gameView, 515, 520);
+		Scene gameScene =  new Scene(this.gameView, 640, 520);
 		gameScene.getStylesheets().add(getClass().getResource("DefaultStyle.css").toExternalForm());
 		gameStage.setScene(gameScene);
 		gameStage.setTitle("Nim");
@@ -101,14 +101,14 @@ public class PlayerController {
 	
 	public void getStartValue(KeyEvent e)  {
 		logger.info("Checking Recieved Stick Count...");
-		int dimension = 85;
+		int dimension = 88;
 		if(e.getCode() == KeyCode.ENTER) {
 			if(checkUserInput) {
 				int sticks = Integer.valueOf(this.gameView.userInput.getText());
 				
 				this.gameView.roundChanges.setText("Player has choosen to start with "+ sticks + " sticks." );
 				if(sticks>24) {
-					dimension = 70;
+					dimension = 75;
 				}else if(sticks>20) {
 					dimension = 68;
 				}
@@ -160,7 +160,7 @@ public class PlayerController {
 		public void run() {
 			 Platform.runLater(new Runnable() {
 	             @Override public void run() {
-	            	 scene = new Scene(new GameView(), 615, 600);
+	            	 scene = new Scene(new GameView(), 700, 600);
 	         		 stage.setScene(scene);
 	             }
 	         });

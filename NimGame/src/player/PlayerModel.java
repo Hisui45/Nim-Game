@@ -10,6 +10,8 @@ public class PlayerModel {
 	private GameView gameView;
 	private int firstTurn;
 	private PlayerController playerController;
+	private static String firstPlayer;
+	private static String secondPlayer;
 	public boolean enter;
 	public boolean press;
 	private static final Logger logger = Logger.getLogger("");
@@ -27,9 +29,14 @@ public class PlayerModel {
 		
 		if(playerDecision % 2 == 0) {
 			firstTurn = 0;
+			firstPlayer = this.gameView.playerOne.getText();
+			secondPlayer = "Computer";
 			return this.gameView.playerOne.getText();
+			
 		}else {
 			firstTurn = 1;
+			firstPlayer = "Computer";
+			secondPlayer = this.gameView.playerOne.getText();
 			return "Computer";
 		}
 	
@@ -50,6 +57,7 @@ public class PlayerModel {
 	             @Override public void run() {
 	            	 if(firstTurn == 1) {
 	            		 gameView.roundChanges.setText(gameView.playerOne.getText() +" enter the starting number of sticks. (6-28)");
+	            		 
 	            	 }else {
 	            		 gameView.roundChanges.setText(gameView.playerTwo.getText() +" will pick the starting number of sticks. (6-28)");
 	            	 }
@@ -87,13 +95,13 @@ public class PlayerModel {
 			
 		}
 	
-	public void promptForInput() throws InterruptedException {
+	public void promptForInput(String player) throws InterruptedException {
 		
 		synchronized(this) 
         { 
 			Platform.runLater(new Runnable() {
 	             @Override public void run() {
-	            		gameView.roundChanges.setText("How many sticks will you take?");
+	            		gameView.roundChanges.setText(player+" how many sticks will you take?");
 	             }
 	         });
 		
@@ -141,38 +149,137 @@ public class PlayerModel {
 //	
 	
 
-//	public class FirstPlayer extends Thread {
-//		
-//		
-//		public void run() {
-//			
-//			try {
-//				promptForInput();
-//			} catch (InterruptedException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		}
-//	}
-//	
-//	public class SecondPlayer extends Thread {
-//		
-//		
-//		public void run() {
-//			try {
-//				//promptForInput();
-//			} catch (InterruptedException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//			
-//		}
-//	}
-//	
+	public class FirstPlayer extends Thread {
+		String player;
+		
+		public FirstPlayer(String player) {
+			
+			this.player	= player;
+		}
+		
+		public void run() {
+			
+			synchronized(this){ 
+				
+			Thread t1 = new Thread(new Runnable(){ 
+	            @Override
+	            public void run(){ 
+	                try{ 
+	                   promptForInput(player); 
+	                }catch(InterruptedException e){ 
+	                    e.printStackTrace(); 
+	                } 
+	            } 
+	        });
+			
+			 Thread t2 = new Thread(new Runnable(){ 
+		            @Override
+		            public void run(){ 
+		            	
+		                try{ 
+		                    getInput(); 
+		                } 
+		                catch(InterruptedException e){ 
+		                    e.printStackTrace(); 
+		                } 
+		               
+		            } 
+		        }); 
+		  
+		        // Start both threads 
+		        t1.start(); 
+		        t2.start(); 
+		  
+		        // t1 finishes before t2 
+		        try {
+					t1.join();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
+		        try {
+					t2.join();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		        
+		       // notify();
+			
+			}
+		}
+	}
+	
+	public class SecondPlayer extends Thread {
+		String player;
+		
+		public SecondPlayer(String player) {
+			
+			this.player	= player;
+		}
+		
+		public void run() {
+			
+			synchronized(this){ 
+				System.out.println("test point3");
+//				try {
+//					wait();
+//				} catch (InterruptedException e1) {
+//					// TODO Auto-generated catch block
+//					e1.printStackTrace();
+//				}
+				System.out.println("test point4");
+			Thread t1 = new Thread(new Runnable(){ 
+	            @Override
+	            public void run(){ 
+	                try{ 
+	                   promptForInput(player); 
+	                }catch(InterruptedException e){ 
+	                    e.printStackTrace(); 
+	                } 
+	            } 
+	        });
+			
+			 Thread t2 = new Thread(new Runnable(){ 
+		            @Override
+		            public void run(){ 
+		            	
+		                try{ 
+		                    getInput(); 
+		                } 
+		                catch(InterruptedException e){ 
+		                    e.printStackTrace(); 
+		                } 
+		            } 
+		        }); 
+		  
+		        // Start both threads 
+		        t1.start(); 
+		        t2.start(); 
+		  
+		        // t1 finishes before t2 
+		        try {
+					t1.join();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
+		        try {
+					t2.join();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			
+			}
+		}
+	}
+	
 
 
 	
 	class GameManager extends Thread {
+		boolean gameOver = false;
 		
 		public void run() {
 			
@@ -219,48 +326,30 @@ public class PlayerModel {
 					e.printStackTrace();
 				}
 		  
-			//Taking Sticks Away
-			Thread t1 = new Thread(new Runnable(){ 
-	            @Override
-	            public void run(){ 
-	                try{ 
-	                   promptForInput(); 
-	                }catch(InterruptedException e){ 
-	                    e.printStackTrace(); 
-	                } 
-	            } 
-	        });
+			//Turn System
+		        while(!gameOver) {
+		        	
+		        		FirstPlayer firstPlayer = new FirstPlayer(PlayerModel.firstPlayer);
+		        		SecondPlayer secondPlayer = new SecondPlayer(PlayerModel.secondPlayer);
+		        		
+		        		firstPlayer.start();
+		        		secondPlayer.start();
+		        		
+		        		 try {
+		 		        	firstPlayer.join();
+		 				} catch (InterruptedException e) {
+		 					// TODO Auto-generated catch block
+		 					e.printStackTrace();
+		 				} 
+		 		        try {
+		 		        	secondPlayer.join();
+		 				} catch (InterruptedException e) {
+		 					// TODO Auto-generated catch block
+		 					e.printStackTrace();
+		 				}
+		        	
+		        }
 			
-			 Thread t2 = new Thread(new Runnable(){ 
-		            @Override
-		            public void run(){ 
-		            	
-		                try{ 
-		                    getInput(); 
-		                } 
-		                catch(InterruptedException e){ 
-		                    e.printStackTrace(); 
-		                } 
-		            } 
-		        }); 
-		  
-		        // Start both threads 
-		        t1.start(); 
-		        t2.start(); 
-		  
-		        // t1 finishes before t2 
-		        try {
-					t1.join();
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} 
-		        try {
-					t2.join();
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
 	            
 	
 
